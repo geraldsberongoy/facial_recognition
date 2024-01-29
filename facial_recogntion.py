@@ -54,7 +54,13 @@ class App:
         self.accept_button_register_new_user_window = util.get_button(self.register_new_user_window, 'Accept', 'green',
                                                                        self.accept_register_new_user)
         self.accept_button_register_new_user_window.place(x=750, y=300)
-        
+
+        self.try_again_button_register_new_user_window = util.get_button(self.register_new_user_window, 'Try Again', 'red', 
+                                                                         self.accept_register_new_user)
+        self.try_again_button_register_new_user_window.place(x=750, y=400)       
+
+
+
     def accept_register_new_user(self):
         pass                                          
 
