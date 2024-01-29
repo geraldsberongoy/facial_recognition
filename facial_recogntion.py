@@ -3,6 +3,7 @@
 
 import tkinter as tk
 import util
+import cv2
 
 class App:
     def __init__(self):
@@ -17,7 +18,23 @@ class App:
                                                                     self.register_new_user, fg='black')
         self.register_new_user_button_main_window.place(x=750, y=400)
 
+        self.webcam_label = util.get_img_label(self.main_window)
+        self.webcam_label.place(x=10, y=0, width=700, height=500)
 
+        self.add_webcam(self.webcam_label)
+
+    def add_webcam(self,label):
+        if 'capture' not in self.__dict__:
+            self.capture = cv2.VideoCapture(0)
+        
+        self._label = label
+        self.process_webcam()
+        
+    def process_webcam(self):
+        rot, frame = self.capture.read()
+        self.most_recent_capture_array = frame
+
+        cv2.cvtColor(self.most_recent_capture_array, cv2.COLOR_BGR2RGB)
 
     def login(self):
         pass
