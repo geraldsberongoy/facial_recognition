@@ -59,6 +59,9 @@ class App:
                                                                          self.accept_register_new_user)
         self.try_again_button_register_new_user_window.place(x=750, y=400)       
 
+        self.capture_label = util.get_img_label(self.register_new_user_window)
+        self.capture_label.place(x=10, y=0, width=700, height=500)
+
 
 
     def accept_register_new_user(self):
