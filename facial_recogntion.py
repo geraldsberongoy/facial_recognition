@@ -48,7 +48,15 @@ class App:
     def login(self):
         pass
     def register_new_user(self):
-        pass
+        self.register_new_user_window = tk.Toplevel(self.main_window)
+        self.register_new_user_window.geometry("1200x520+370+120")
+
+        self.accept_button_register_new_user_window = util.get_button(self.register_new_user_window, 'Accept', 'green',
+                                                                       self.accept_register_new_user)
+        self.accept_button_register_new_user_window.place(x=750, y=300)
+        
+    def accept_register_new_user(self):
+        pass                                          
 
 
     def start(self):
