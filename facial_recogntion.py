@@ -47,6 +47,7 @@ class App:
 
     def login(self):
         pass
+
     def register_new_user(self):
         self.register_new_user_window = tk.Toplevel(self.main_window)
         self.register_new_user_window.geometry("1200x520+370+120")
@@ -61,6 +62,16 @@ class App:
 
         self.capture_label = util.get_img_label(self.register_new_user_window)
         self.capture_label.place(x=10, y=0, width=700, height=500)
+
+        self.add_img_to_label(self.capture_label)
+
+    def add_img_to_label(self, label):
+        imgtk = ImageTk.PhotoImage(image=self.most_recent_capture_array_pil)        
+        label.imgtk = imgtk
+        label.configure(image=imgtk)
+
+        self.register_new_capture = self.most_recent_capture_array_copy()
+
 
 
 
