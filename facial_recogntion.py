@@ -4,6 +4,7 @@
 import tkinter as tk
 import util
 import cv2
+from PIL import Image, ImageTk
 
 class App:
     def __init__(self):
@@ -29,12 +30,21 @@ class App:
         
         self._label = label
         self.process_webcam()
-        
+
     def process_webcam(self):
-        rot, frame = self.capture.read()
+        ret, frame = self.capture.read()
         self.most_recent_capture_array = frame
 
-        cv2.cvtColor(self.most_recent_capture_array, cv2.COLOR_BGR2RGB)
+        img_ = cv2.cvtColor(self.most_recent_capture_array, cv2.COLOR_BGR2RGB)
+
+        self.most_recent_capture_array.pil = Image.fromarray(img_)
+
+        imgtk = ImageTk.PhotoImage(image=self.most_recent_capture_array.pil)
+
+        self._label.imgtk = imgtk
+        self.label.configure(image=imgtk)
+
+        self._label.after(20, self.process_webcam())
 
     def login(self):
         pass
