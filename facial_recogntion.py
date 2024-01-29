@@ -37,14 +37,13 @@ class App:
 
         img_ = cv2.cvtColor(self.most_recent_capture_array, cv2.COLOR_BGR2RGB)
 
-        self.most_recent_capture_array.pil = Image.fromarray(img_)
+        self.most_recent_capture_array_pil = Image.fromarray(img_)
 
-        imgtk = ImageTk.PhotoImage(image=self.most_recent_capture_array.pil)
-
+        imgtk = ImageTk.PhotoImage(image=self.most_recent_capture_array_pil)
         self._label.imgtk = imgtk
-        self.label.configure(image=imgtk)
+        self._label.configure(image=imgtk)
 
-        self._label.after(20, self.process_webcam())
+        self._label.after(20, self.process_webcam)
 
     def login(self):
         pass
