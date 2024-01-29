@@ -5,6 +5,7 @@ import tkinter as tk
 import util
 import cv2
 from PIL import Image, ImageTk
+import os
 
 class App:
     def __init__(self):
@@ -84,13 +85,15 @@ class App:
         label.imgtk = imgtk
         label.configure(image=imgtk)
 
-        self.register_new_capture = self.most_recent_capture_array_copy()
+        self.register_new_capture = self.most_recent_capture_array.copy()
 
 
 
 
     def accept_register_new_user(self):
-        pass                                          
+        name = self.entry_text_register_new_user.get("1.0", "end-1c")
+        cv2.imwrite(os.path.join(self.db_dir, '{}.jpg'.format(name)), self.register_new_capture)
+
 
 
     def start(self):
