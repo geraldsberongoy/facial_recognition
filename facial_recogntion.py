@@ -72,6 +72,10 @@ class App:
 
         self.add_img_to_label(self.capture_label)
 
+        self.db_dir = './db'
+        if not os.path.exists(self.db_dir):
+            os.makedirs(self.db_dir)
+
     def try_again_register_new_user(self):
         self.register_new_user_window.destroy()
 
