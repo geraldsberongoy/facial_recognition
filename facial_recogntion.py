@@ -63,6 +63,13 @@ class App:
         self.capture_label = util.get_img_label(self.register_new_user_window)
         self.capture_label.place(x=10, y=0, width=700, height=500)
 
+        self.entry_text_register_new_user = util.get_entry_text(self.register_new_user_window)
+        self.entry_text_register_new_user.place(x=750, y=150)
+
+        self.text_label_register_new_user = util.get_text_label(self.register_new_user_window, 'Enter your username:')
+        self.text_label_register_new_user.place(x=790, y=70)
+
+
         self.add_img_to_label(self.capture_label)
 
     def try_again_register_new_user(self):
