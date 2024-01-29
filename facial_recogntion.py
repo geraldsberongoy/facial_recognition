@@ -57,13 +57,16 @@ class App:
         self.accept_button_register_new_user_window.place(x=750, y=300)
 
         self.try_again_button_register_new_user_window = util.get_button(self.register_new_user_window, 'Try Again', 'red', 
-                                                                         self.accept_register_new_user)
+                                                                         self.try_again_register_new_user)
         self.try_again_button_register_new_user_window.place(x=750, y=400)       
 
         self.capture_label = util.get_img_label(self.register_new_user_window)
         self.capture_label.place(x=10, y=0, width=700, height=500)
 
         self.add_img_to_label(self.capture_label)
+
+    def try_again_register_new_user(self):
+        self.register_new_user_window.destroy()
 
     def add_img_to_label(self, label):
         imgtk = ImageTk.PhotoImage(image=self.most_recent_capture_array_pil)        
