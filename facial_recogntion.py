@@ -6,6 +6,7 @@ import util
 import cv2
 from PIL import Image, ImageTk
 import os
+import subprocess
 
 class App:
     def __init__(self):
@@ -24,7 +25,11 @@ class App:
         self.webcam_label.place(x=10, y=0, width=700, height=500)
 
         self.add_webcam(self.webcam_label)
-
+        
+        self.db_dir = './db'
+        if not os.path.exists(self.db_dir):
+            os.mkdir(self.db_dir)
+            
     def add_webcam(self,label):
         if 'capture' not in self.__dict__:
             self.capture = cv2.VideoCapture(0)
@@ -47,7 +52,13 @@ class App:
         self._label.after(20, self.process_webcam)
 
     def login(self):
-        pass
+        unknown_person = './.tmp.jpg'
+
+        cv2.imwrite(unknown_person, self.most_recent_capture_array)
+        
+        output = subprocess.check_output(['face_recognition', self.db_dir, unknown_person])
+        print(output)
+        os.remove(unknown_person)
 
     def register_new_user(self):
         self.register_new_user_window = tk.Toplevel(self.main_window)
