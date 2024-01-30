@@ -94,7 +94,8 @@ class App:
         name = self.entry_text_register_new_user.get("1.0", "end-1c")
         cv2.imwrite(os.path.join(self.db_dir, '{}.jpg'.format(name)), self.register_new_capture)
 
-        util.show_message('User registered successfully', 'Success')
+        util.msg_box('User registered successfully', 'Success')
+        self.register_new_user_window.destroy()
 
     def start(self):
         self.main_window.mainloop()
