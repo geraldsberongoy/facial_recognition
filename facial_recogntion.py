@@ -10,9 +10,21 @@ import subprocess
 
 class App:
     def __init__(self):
+
+        self.intro_window = tk.Tk()
+        self.intro_window.title("Welcome to Facial Recognition")
+        self.intro_window.geometry("400x200+500+200")
+        self.label_intro_window = util.get_text_label(self.intro_window, "Facial Recognition System!")
+        self.label_intro_window.pack(pady=20)
+
+        self.start_button = util.get_button(self.intro_window, 'Start', 'green', self.start_main_application)
+        self.start_button.pack()
+
+    def start_main_application(self):
+        self.intro_window.destroy()
+        
         self.main_window = tk.Tk()
-        self.main_window.geometry("1200x520+350+100")
-        self.main_window.title("Facial Recognition")
+        self.main_window.geometry("1200x520+370+120")
 
         self.login_button_main_window = util.get_button(self.main_window, 'Login', 'green', self.login)
         self.login_button_main_window.place(x=750, y=300)
@@ -29,7 +41,7 @@ class App:
         self.db_dir = './db'
         if not os.path.exists(self.db_dir):
             os.mkdir(self.db_dir)
-            
+
     def add_webcam(self,label):
         if 'capture' not in self.__dict__:
             self.capture = cv2.VideoCapture(0)
@@ -97,10 +109,7 @@ class App:
         label.configure(image=imgtk)
 
         self.register_new_capture = self.most_recent_capture_array.copy()
-
-
-
-
+    
     def accept_register_new_user(self):
         name = self.entry_text_register_new_user.get("1.0", "end-1c")
         cv2.imwrite(os.path.join(self.db_dir, '{}.jpg'.format(name)), self.register_new_capture)
@@ -109,7 +118,8 @@ class App:
         self.register_new_user_window.destroy()
 
     def start(self):
-        self.main_window.mainloop()
+        self.intro_window.mainloop()
+        
 if __name__ == "__main__":
     app = App()
     app.start()
