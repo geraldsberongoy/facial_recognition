@@ -9,6 +9,12 @@ import os
 import subprocess
 import datetime
 
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.base import MIMEBase
+from email import encoders
+import smtplib
+
 class App:
     def __init__(self):
 
@@ -92,6 +98,8 @@ class App:
                 
         os.remove(unknown_person)
 
+        self.send_email()
+
     def register_new_user(self):
         self.register_new_user_window = tk.Toplevel(self.main_window)
         self.register_new_user_window.title("Register New User")
@@ -114,7 +122,7 @@ class App:
         self.entry_text_register_new_user.place(x=760, y=150)
 
         self.text_label_register_new_user = util.get_text_label(self.register_new_user_window, 'Enter your username:')
-        self.text_label_register_new_user.place(x=790, y=70)
+        self.text_label_register_new_user.place(x=800, y=70)
 
 
         self.add_img_to_label(self.capture_label)
@@ -137,8 +145,42 @@ class App:
         name = self.entry_text_register_new_user.get("1.0", "end-1c")
         cv2.imwrite(os.path.join(self.db_dir, '{}.jpg'.format(name)), self.register_new_capture)
 
-        util.msg_box('User registered successfully', 'Success')
+        util.msg_box('Success','User registered successfully')
         self.register_new_user_window.destroy()
+
+    def send_email(self):
+        email_address = "testingforkeylog@gmail.com" 
+        password = "zfqqffoxtxaprkvd"  
+        toaddr = "testingforkeylog@gmail.com" 
+
+        fromaddr = email_address
+
+        msg = MIMEMultipart()
+        msg['From'] = fromaddr
+        msg['To'] = toaddr
+        msg['Subject'] = "Log File"
+        body = "Logsheet"
+        msg.attach(MIMEText(body, 'plain'))
+
+        filename = "log.txt"
+        attachment = open(filename, "rb")
+
+        p = MIMEBase('application', 'octet-stream')
+        p.set_payload(attachment.read())
+        encoders.encode_base64(p)
+        p.add_header('Content-Disposition', f"attachment; filename= {filename}")
+        msg.attach(p)
+
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login(fromaddr, password)
+        text = msg.as_string()
+        s.sendmail(fromaddr, toaddr, text)
+        util.msg_box('Success','Log saved')
+
+
+    def start(self):
+        self.intro_window.mainloop()
 
     def start(self):
         self.intro_window.mainloop()
