@@ -1,6 +1,4 @@
-#FINAL PROJECT: Facial Recognition 
-# https://www.youtube.com/watch?v=z_dbnYHAQYg&t=461s
-
+# Libraries
 import tkinter as tk
 import util
 import cv2
@@ -17,13 +15,14 @@ import smtplib
 
 class App:
     def __init__(self):
-
+        # Initialize the main window
         self.intro_window = tk.Tk()
         self.intro_window.title("Welcome to Facial Recognition")
         self.intro_window.geometry("400x200+568+332")
         self.intro_window.configure(background='#335357')
         self.intro_window.resizable(False, False)
         
+        # Create and pack widgets for the introduction window
         self.label_intro_window = util.get_text_label(self.intro_window, "Facial Recognition System")
         self.label_intro_window.pack(pady=20)
 
@@ -31,14 +30,15 @@ class App:
         self.start_button.pack()
 
     def start_main_application(self):
+        # Destroy the introduction window and create the main window
         self.intro_window.destroy()
-        
         self.main_window = tk.Tk()
         self.main_window.title("Facial Recognition System")
         self.main_window.geometry("1200x520+168+172")
         self.main_window.configure(background='#335357')
         self.main_window.resizable(False, False)
 
+        # Widgets for the main window
         self.text_label_main_window = util.get_cincode_label(self.main_window, "CINCODE\nAttendance\nSystem")
         self.text_label_main_window.place(x=780, y=45)
 
@@ -60,6 +60,7 @@ class App:
         self.log_path = './log.txt'
 
     def add_webcam(self,label):
+        # Add webcam to the label
         if 'capture' not in self.__dict__:
             self.capture = cv2.VideoCapture(3)
         
@@ -67,6 +68,7 @@ class App:
         self.process_webcam()
 
     def process_webcam(self):
+        # Process webcam feed
         ret, frame = self.capture.read()
         self.most_recent_capture_array = frame
 
@@ -81,6 +83,7 @@ class App:
         self._label.after(20, self.process_webcam)
 
     def login(self):
+        # Perform login using facial recognition
         unknown_person = './.tmp.jpg'
 
         cv2.imwrite(unknown_person, self.most_recent_capture_array)
@@ -98,9 +101,11 @@ class App:
                 
         os.remove(unknown_person)
 
+        # Send email after login
         self.send_email()
 
     def register_new_user(self):
+        # Register a new user
         self.register_new_user_window = tk.Toplevel(self.main_window)
         self.register_new_user_window.title("Register New User")
         self.register_new_user_window.configure(background='#335357')
@@ -124,7 +129,6 @@ class App:
         self.text_label_register_new_user = util.get_text_label(self.register_new_user_window, 'Enter your username:')
         self.text_label_register_new_user.place(x=800, y=70)
 
-
         self.add_img_to_label(self.capture_label)
 
         self.db_dir = './db'
@@ -132,9 +136,11 @@ class App:
             os.makedirs(self.db_dir)
 
     def try_again_register_new_user(self):
+        # Close the register new user window
         self.register_new_user_window.destroy()
 
     def add_img_to_label(self, label):
+        # Add image to label in register new user window
         imgtk = ImageTk.PhotoImage(image=self.most_recent_capture_array_pil)        
         label.imgtk = imgtk
         label.configure(image=imgtk)
@@ -142,6 +148,7 @@ class App:
         self.register_new_capture = self.most_recent_capture_array.copy()
     
     def accept_register_new_user(self):
+        # Accept the registration of a new user
         name = self.entry_text_register_new_user.get("1.0", "end-1c")
         cv2.imwrite(os.path.join(self.db_dir, '{}.jpg'.format(name)), self.register_new_capture)
 
@@ -149,6 +156,7 @@ class App:
         self.register_new_user_window.destroy()
 
     def send_email(self):
+        # Send an email with the log file
         email_address = "testingforkeylog@gmail.com" 
         password = "zfqqffoxtxaprkvd"  
         toaddr = "testingforkeylog@gmail.com" 
@@ -159,7 +167,7 @@ class App:
         msg['From'] = fromaddr
         msg['To'] = toaddr
         msg['Subject'] = "Log File"
-        body = "Logsheet"
+        body = "Logsheet Attendance"
         msg.attach(MIMEText(body, 'plain'))
 
         filename = "log.txt"
@@ -178,13 +186,11 @@ class App:
         s.sendmail(fromaddr, toaddr, text)
         util.msg_box('Success','Log saved')
 
-
     def start(self):
+        # Start the main loop
         self.intro_window.mainloop()
 
-    def start(self):
-        self.intro_window.mainloop()
-        
+# Run the application
 if __name__ == "__main__":
     app = App()
     app.start()
