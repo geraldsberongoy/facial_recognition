@@ -78,7 +78,9 @@ class App:
         else:
             util.msg_box('Welcome', 'Welcome {}'.format(name))
             with open(self.log_path, 'a') as f:
-                f.write('{}\n'.format(name))
+                f.write('{},{}\n'.format(name, datetime.datetime.now()))
+                f.close()
+                
         os.remove(unknown_person)
 
     def register_new_user(self):
