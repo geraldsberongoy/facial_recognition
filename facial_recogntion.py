@@ -29,10 +29,9 @@ class App:
         
         self.main_window = tk.Tk()
         self.main_window.title("Facial Recognition System")
+        self.main_window.geometry("1200x520+168+172")
         self.main_window.configure(background='#335357')
         self.main_window.resizable(False, False)
-        self.main_window.geometry("1200x520+370+120")
-
 
         self.text_label_main_window = util.get_cincode_label(self.main_window, "CINCODE\nAttendance\nSystem")
         self.text_label_main_window.place(x=780, y=45)
