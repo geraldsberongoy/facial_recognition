@@ -97,7 +97,7 @@ class App:
         self.register_new_user_window.title("Register New User")
         self.register_new_user_window.configure(background='#335357')
         self.register_new_user_window.resizable(False, False)
-        self.register_new_user_window.geometry("1200x520+370+120")
+        self.register_new_user_window.geometry("1200x520+180+187")
 
         self.accept_button_register_new_user_window = util.get_button(self.register_new_user_window, 'Accept', 'green',
                                                                        self.accept_register_new_user)
