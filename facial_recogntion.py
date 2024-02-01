@@ -15,7 +15,10 @@ class App:
         self.intro_window = tk.Tk()
         self.intro_window.title("Welcome to Facial Recognition")
         self.intro_window.geometry("400x200+500+200")
-        self.label_intro_window = util.get_text_label(self.intro_window, "Facial Recognition System!")
+        self.intro_window.configure(background='#335357')
+        self.intro_window.resizable(False, False)
+        
+        self.label_intro_window = util.get_text_label(self.intro_window, "Facial Recognition System")
         self.label_intro_window.pack(pady=20)
 
         self.start_button = util.get_button(self.intro_window, 'Start', 'green', self.start_main_application)
@@ -25,17 +28,24 @@ class App:
         self.intro_window.destroy()
         
         self.main_window = tk.Tk()
+        self.main_window.title("Facial Recognition System")
+        self.main_window.configure(background='#335357')
+        self.main_window.resizable(False, False)
         self.main_window.geometry("1200x520+370+120")
 
+
+        self.text_label_main_window = util.get_cincode_label(self.main_window, "CINCODE\nAttendance\nSystem")
+        self.text_label_main_window.place(x=780, y=45)
+
         self.login_button_main_window = util.get_button(self.main_window, 'Login', 'green', self.login)
-        self.login_button_main_window.place(x=750, y=300)
+        self.login_button_main_window.place(x=770, y=300)
         
         self.register_new_user_button_main_window = util.get_button(self.main_window, 'Register New User', 'gray',
                                                                     self.register_new_user, fg='black')
-        self.register_new_user_button_main_window.place(x=750, y=400)
+        self.register_new_user_button_main_window.place(x=770, y=400)
 
         self.webcam_label = util.get_img_label(self.main_window)
-        self.webcam_label.place(x=10, y=0, width=700, height=500)
+        self.webcam_label.place(x=10, y=10, width=700, height=500)
 
         self.add_webcam(self.webcam_label)
         
@@ -76,7 +86,7 @@ class App:
         if name in ['unknown_person', "no_persons_found"]:
             util.msg_box('Error', 'No match found, please register new user or try again')
         else:
-            util.msg_box('Welcome', 'Welcome {}'.format(name))
+            util.msg_box('Welcome', 'Welcome, {}'.format(name))
             with open(self.log_path, 'a') as f:
                 f.write('{},{}\n'.format(name, datetime.datetime.now()))
                 f.close()
@@ -85,21 +95,24 @@ class App:
 
     def register_new_user(self):
         self.register_new_user_window = tk.Toplevel(self.main_window)
+        self.register_new_user_window.title("Register New User")
+        self.register_new_user_window.configure(background='#335357')
+        self.register_new_user_window.resizable(False, False)
         self.register_new_user_window.geometry("1200x520+370+120")
 
         self.accept_button_register_new_user_window = util.get_button(self.register_new_user_window, 'Accept', 'green',
                                                                        self.accept_register_new_user)
-        self.accept_button_register_new_user_window.place(x=750, y=300)
+        self.accept_button_register_new_user_window.place(x=760, y=300)
 
         self.try_again_button_register_new_user_window = util.get_button(self.register_new_user_window, 'Try Again', 'red', 
                                                                          self.try_again_register_new_user)
-        self.try_again_button_register_new_user_window.place(x=750, y=400)       
+        self.try_again_button_register_new_user_window.place(x=760, y=400)       
 
         self.capture_label = util.get_img_label(self.register_new_user_window)
         self.capture_label.place(x=10, y=0, width=700, height=500)
 
         self.entry_text_register_new_user = util.get_entry_text(self.register_new_user_window)
-        self.entry_text_register_new_user.place(x=750, y=150)
+        self.entry_text_register_new_user.place(x=760, y=150)
 
         self.text_label_register_new_user = util.get_text_label(self.register_new_user_window, 'Enter your username:')
         self.text_label_register_new_user.place(x=790, y=70)
