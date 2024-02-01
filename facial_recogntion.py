@@ -41,7 +41,8 @@ class App:
         self.db_dir = './db'
         if not os.path.exists(self.db_dir):
             os.mkdir(self.db_dir)
-
+        self.log_path = './log.txt'
+        
     def add_webcam(self,label):
         if 'capture' not in self.__dict__:
             self.capture = cv2.VideoCapture(3)
