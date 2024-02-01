@@ -77,7 +77,8 @@ class App:
             util.msg_box('Error', 'No match found, please register new user or try again')
         else:
             util.msg_box('Welcome', 'Welcome {}'.format(name))
-            
+            with open(self.log_path, 'a') as f:
+                f.write('{}\n'.format(name))
         os.remove(unknown_person)
 
     def register_new_user(self):
