@@ -69,7 +69,7 @@ class App:
         cv2.imwrite(unknown_person, self.most_recent_capture_array)
         
         output = str(subprocess.check_output(['face_recognition', self.db_dir, unknown_person]))
-        name = output.split(',')[1][:-3][:-2]
+        name = output.split(',') [1][:-3][:-2]
         print(name)
 
         os.remove(unknown_person)
