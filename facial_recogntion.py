@@ -14,7 +14,7 @@ class App:
 
         self.intro_window = tk.Tk()
         self.intro_window.title("Welcome to Facial Recognition")
-        self.intro_window.geometry("400x200+500+200")
+        self.intro_window.geometry("400x200+568+332")
         self.intro_window.configure(background='#335357')
         self.intro_window.resizable(False, False)
         
