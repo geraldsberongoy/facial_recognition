@@ -7,6 +7,7 @@ import cv2
 from PIL import Image, ImageTk
 import os
 import subprocess
+import datetime
 
 class App:
     def __init__(self):
@@ -42,7 +43,7 @@ class App:
         if not os.path.exists(self.db_dir):
             os.mkdir(self.db_dir)
         self.log_path = './log.txt'
-        
+
     def add_webcam(self,label):
         if 'capture' not in self.__dict__:
             self.capture = cv2.VideoCapture(3)
@@ -76,7 +77,7 @@ class App:
             util.msg_box('Error', 'No match found, please register new user or try again')
         else:
             util.msg_box('Welcome', 'Welcome {}'.format(name))
-        print(name)
+            
         os.remove(unknown_person)
 
     def register_new_user(self):
