@@ -16,7 +16,7 @@ def get_button(window, text, color, command, fg='white'):
                         bg=color,
                         command=command,
                         height=2,
-                        width=20,
+                        width=22,
                         font=('Helvetica bold', 20)
                     )
 
@@ -24,14 +24,19 @@ def get_button(window, text, color, command, fg='white'):
 
 
 def get_img_label(window):
-    label = tk.Label(window)
+    label = tk.Label(window, bg="#335357")
     label.grid(row=0, column=0)
     return label
 
 
 def get_text_label(window, text):
     label = tk.Label(window, text=text)
-    label.config(font=("sans-serif", 21), justify="left")
+    label.config(font=("sans-serif", 21), justify="center", bg="#335357", fg="white")
+    return label
+
+def get_cincode_label(window, text):
+    label = tk.Label(window, text=text)
+    label.config(font=("Helvetica", 50), justify="center", bg="#335357", fg="white")
     return label
 
 
@@ -47,7 +52,6 @@ def msg_box(title, description):
 
 
 def recognize(img, db_path):
-    # it is assumed there will be at most 1 match in the db
 
     embeddings_unknown = face_recognition.face_encodings(img)
     if len(embeddings_unknown) == 0:
