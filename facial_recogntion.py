@@ -44,7 +44,7 @@ class App:
 
     def add_webcam(self,label):
         if 'capture' not in self.__dict__:
-            self.capture = cv2.VideoCapture(0)
+            self.capture = cv2.VideoCapture(3)
         
         self._label = label
         self.process_webcam()
@@ -68,8 +68,10 @@ class App:
 
         cv2.imwrite(unknown_person, self.most_recent_capture_array)
         
-        output = subprocess.check_output(['face_recognition', self.db_dir, unknown_person])
-        print(output)
+        output = str(subprocess.check_output(['face_recognition', self.db_dir, unknown_person]))
+        name = output.split(',')[1][:-3][:-2]
+        print(name)
+
         os.remove(unknown_person)
 
     def register_new_user(self):
