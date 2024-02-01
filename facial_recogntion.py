@@ -73,7 +73,8 @@ class App:
         
         if name in ['unknown_person', "no_persons_found"]:
             util.msg_box('Error', 'No match found, please register new user or try again')
-
+        else:
+            util.msg_box('Welcome', 'Welcome {}'.format(name))
         print(name)
         os.remove(unknown_person)
 
