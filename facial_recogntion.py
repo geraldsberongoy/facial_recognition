@@ -70,8 +70,11 @@ class App:
         
         output = str(subprocess.check_output(['face_recognition', self.db_dir, unknown_person]))
         name = output.split(',') [1][:-3][:-2]
-        print(name)
+        
+        if name in ['unknown_person', "no_persons_found"]:
+            util.msg_box('Error', 'No match found, please register new user or try again')
 
+        print(name)
         os.remove(unknown_person)
 
     def register_new_user(self):
