@@ -95,14 +95,12 @@ class App:
             util.msg_box('Error', 'No match found, please register new user or try again')
         else:
             util.msg_box('Welcome', 'Welcome, {}'.format(name))
+            self.send_email()
             with open(self.log_path, 'a') as f:
                 f.write('{},{}\n'.format(name, datetime.datetime.now()))
                 f.close()
                 
         os.remove(unknown_person)
-
-        # Send email after login
-        self.send_email()
 
     def register_new_user(self):
         # Register a new user
