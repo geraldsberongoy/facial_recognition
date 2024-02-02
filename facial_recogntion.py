@@ -1,3 +1,6 @@
+#FINAL PROJECT: Facial Recognition 
+# https://www.youtube.com/watch?v=z_dbnYHAQYg&t=461s
+
 # Libraries
 import tkinter as tk
 import util
@@ -92,7 +95,7 @@ class App:
         name = output.split(',') [1][:-3][:-2]
         
         if name in ['unknown_person', "no_persons_found"]:
-            util.msg_box('Error', 'No match found, please register new user or try again')
+            util.msg_box('Error', 'No match found, please register new user or try again.')
         else:
             util.msg_box('Welcome', 'Welcome, {}'.format(name))
             self.send_email()
