@@ -65,7 +65,7 @@ class App:
     def add_webcam(self,label):
         # Add webcam to the label
         if 'capture' not in self.__dict__:
-            self.capture = cv2.VideoCapture(3)
+            self.capture = cv2.VideoCapture(0)
         
         self._label = label
         self.process_webcam()
@@ -94,15 +94,14 @@ class App:
         output = str(subprocess.check_output(['face_recognition', self.db_dir, unknown_person]))
         name = output.split(',') [1][:-3][:-2]
         
-        if name in ['unknown_person', "no_persons_found"]:
+        if name in ["unknown_person", "no_persons_found"]:
             util.msg_box('Error', 'No match found, please register new user or try again.')
         else:
             util.msg_box('Welcome', 'Welcome, {}'.format(name))
-            self.send_email()
             with open(self.log_path, 'a') as f:
                 f.write('{},{}\n'.format(name, datetime.datetime.now()))
                 f.close()
-                
+            self.send_email()
         os.remove(unknown_person)
 
     def register_new_user(self):
