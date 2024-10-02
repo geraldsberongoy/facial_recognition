@@ -1,0 +1,5 @@
+tk
+opencv-python-headless
+Pillow
+face_recognition
+smtplib
