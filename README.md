@@ -1,6 +1,6 @@
 # **Face Recognition with Attendance and Email System**
 
-![Screenshot](images/register.png)
+![Screenshot](images/image.png)
 
 ## Features
 - Face recognition for attendance tracking
